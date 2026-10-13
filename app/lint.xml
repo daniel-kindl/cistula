@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!--
+      Kotlin 2.4.21 fully supports Gradle through 9.7.0.
+      Gradle 9.7.1 is the newest release on that line.
+      The check reports Gradle 9.8.1, which is outside that support line.
+      The ignore is limited to the wrapper properties file.
+    -->
+    <issue id="AndroidGradlePluginVersion">
+        <ignore path="**/gradle-wrapper.properties" />
+    </issue>
+</lint>
