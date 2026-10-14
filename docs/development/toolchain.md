@@ -26,6 +26,12 @@ Plugin Portal, services.gradle.org, kotlinlang.org, developer.android.com). All 
 - Dependabot alerts and security updates (repository setting).
 - Dependency Analysis Gradle Plugin for unused or misdeclared dependencies.
 - `dependency-review` CI job on PRs.
+- Build-tool security constraints: `build-tool-security-constraints` in `libs.versions.toml` raises
+  transitive build-time libraries (Bouncy Castle, jose4j, jdom2, httpclient, commons-lang3) that AGP,
+  Kotlin, or Android Lint bring with known advisories. They apply to the root build classpath and
+  the `androidLintTool` configuration. They do not enter the APK. Remove an entry when the tools
+  bring a fixed version. The Kotlin Gradle plugin 2.4.0 that Gradle's embedded Kotlin DSL brings
+  (GHSA-r937-wjx7-w2jp) cannot be constrained from the build.
 - See `repository-settings.md`.
 
 ## Update a version

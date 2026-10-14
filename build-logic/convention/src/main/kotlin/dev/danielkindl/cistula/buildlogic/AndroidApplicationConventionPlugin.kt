@@ -65,7 +65,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 }
             }
 
-            constrainLintToolBouncyCastle(catalog)
+            constrainLintToolDependencies(catalog)
 
             extensions.configure<KotlinAndroidProjectExtension> {
                 compilerOptions {
@@ -77,15 +77,16 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
     }
 
     /**
-     * The Android Lint tool brings Bouncy Castle 1.80.2, which has known advisories. Lint is build
-     * time only. See the bouncycastle entry in gradle/libs.versions.toml.
+     * The Android Lint tool brings dependencies with known advisories. Lint is build time only.
+     * See build-tool-security-constraints in gradle/libs.versions.toml.
      */
-    private fun Project.constrainLintToolBouncyCastle(catalog: VersionCatalog) {
+    private fun Project.constrainLintToolDependencies(catalog: VersionCatalog) {
+        val constraints = catalog.findBundle(SECURITY_CONSTRAINTS_BUNDLE).get()
         configurations.configureEach {
             if (name == LINT_TOOL_CONFIGURATION) {
-                BOUNCY_CASTLE_ALIASES.forEach { alias ->
-                    dependencyConstraints.addLater(catalog.findLibrary(alias).get().map { project.dependencies.constraints.create(it) })
-                }
+                dependencyConstraints.addAllLater(
+                    constraints.map { libraries -> libraries.map { project.dependencies.constraints.create(it) } },
+                )
             }
         }
     }
@@ -99,6 +100,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
     private companion object {
         const val APPLICATION_ID = "dev.danielkindl.cistula"
         const val LINT_TOOL_CONFIGURATION = "androidLintTool"
-        val BOUNCY_CASTLE_ALIASES = listOf("bouncycastle-bcprov", "bouncycastle-bcpkix", "bouncycastle-bcutil")
+        const val SECURITY_CONSTRAINTS_BUNDLE = "build-tool-security-constraints"
     }
 }

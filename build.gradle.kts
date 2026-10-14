@@ -1,10 +1,10 @@
-// Build classpath security constraint: see the bouncycastle entry in gradle/libs.versions.toml.
+// Build classpath security constraints: see build-tool-security-constraints in gradle/libs.versions.toml.
 buildscript {
     dependencies {
         constraints {
-            classpath(libs.bouncycastle.bcprov)
-            classpath(libs.bouncycastle.bcpkix)
-            classpath(libs.bouncycastle.bcutil)
+            libs.bundles.build.tool.security.constraints
+                .get()
+                .forEach { classpath(it) }
         }
     }
 }
