@@ -61,13 +61,40 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  dependency-submission:
+    name: dependency-submission
+    # Submits the resolved Gradle dependency graph so dependency-review can see Gradle dependencies.
+    # Pushes to main/dev give the base snapshot; same-repository PRs give the head snapshot.
+    # Fork PRs get a read-only token, so they skip this job.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: gradle/actions/dependency-submission@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/main' }}
+
   dependency-review:
     name: dependency-review
     if: github.event_name == 'pull_request'
+    needs: dependency-submission
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
         with:
           fail-on-severity: low
+          retry-on-snapshot-warnings: true
+          retry-on-snapshot-warnings-timeout: 300
           deny-licenses: GPL-2.0-only, GPL-3.0-only, AGPL-3.0-only
