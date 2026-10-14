@@ -7,6 +7,9 @@ detekt = "1.23.8"
 spotless = "8.10.4"
 ktlint = "1.8.0"
 dependency-analysis = "3.19.2"
+# Build-classpath security constraint only (AGP brings Bouncy Castle 1.80.2; GHSA-9pwp-9qqc-pr26,
+# GHSA-qp49-qgx5-5m26, GHSA-c3fc-8qff-9hwx are fixed in 1.85). Remove when AGP brings >= 1.85.
+bouncycastle = "1.86"
 activityCompose = "1.13.0"
 composeBom = "2026.09.00"
 
@@ -27,6 +30,9 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
 
 # Build-logic classpath only.
+bouncycastle-bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }
+bouncycastle-bcpkix = { module = "org.bouncycastle:bcpkix-jdk18on", version.ref = "bouncycastle" }
+bouncycastle-bcutil = { module = "org.bouncycastle:bcutil-jdk18on", version.ref = "bouncycastle" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 compose-compiler-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }

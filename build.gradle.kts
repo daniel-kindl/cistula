@@ -1,3 +1,14 @@
+// Build classpath security constraint: see the bouncycastle entry in gradle/libs.versions.toml.
+buildscript {
+    dependencies {
+        constraints {
+            classpath(libs.bouncycastle.bcprov)
+            classpath(libs.bouncycastle.bcpkix)
+            classpath(libs.bouncycastle.bcutil)
+        }
+    }
+}
+
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.compose) apply false
