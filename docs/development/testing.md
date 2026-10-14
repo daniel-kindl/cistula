@@ -29,6 +29,9 @@ The shared fixture title is `Fixture Title`. It is not the application name. It 
 - Use JUnit assertions. Do not add a second assertion library for one check.
 - Call `androidx.compose.ui.test.junit4.v2.createAndroidComposeRule` in a Compose UI test.
 - Do not call the deprecated `androidx.compose.ui.test.junit4` rule. Kotlin warnings fail the build.
+- Do not call `setContent` on that rule when the activity already set content.
+- Call `androidx.activity.compose.setContent` on the activity from `runOnUiThread`.
+- Call `waitForIdle` after that call.
 
 ## Commands
 

@@ -14,6 +14,10 @@ Tests must be deterministic. A coverage number with no product basis must not fa
 - JVM unit tests use JUnit 4. Instrumentation tests use `AndroidJUnit4` and `AndroidJUnitRunner`.
   Compose UI tests use `androidx.compose.ui.test.junit4.v2` from the Compose BOM. The v1 rule is
   deprecated. Kotlin warnings are errors, so the deprecated rule does not compile.
+- A test that uses `createAndroidComposeRule<MainActivity>` does not call `setContent` on the
+  rule. `MainActivity` already sets content. The test calls
+  `androidx.activity.compose.setContent` on the activity from `runOnUiThread`. The test calls
+  `waitForIdle` after that call.
 - The tested behavior is the application title. `CistulaAppViewModel` takes the title and exposes
   `CistulaAppContent`. `MainActivity` passes `R.string.app_name`. The composable shows
   `content.title`. The type is plain Kotlin. It does not extend `androidx.lifecycle.ViewModel`.

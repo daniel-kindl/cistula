@@ -1,5 +1,6 @@
 package dev.danielkindl.cistula.ui
 
+import androidx.activity.compose.setContent
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -28,11 +29,15 @@ class CistulaAppTest {
         val applicationName = composeTestRule.activity.getString(R.string.app_name)
         val content = CistulaAppViewModel(title = CistulaAppFixture.TITLE).content
 
-        composeTestRule.setContent {
-            CistulaTheme {
-                CistulaApp(content = content)
+        // MainActivity already set content. setContent on the rule throws in that case.
+        composeTestRule.runOnUiThread {
+            composeTestRule.activity.setContent {
+                CistulaTheme {
+                    CistulaApp(content = content)
+                }
             }
         }
+        composeTestRule.waitForIdle()
 
         composeTestRule.onNodeWithText(CistulaAppFixture.TITLE).assertIsDisplayed()
         composeTestRule.onNodeWithText(applicationName).assertDoesNotExist()
