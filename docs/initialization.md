@@ -61,7 +61,7 @@ Kotlin 2.4.21 records AGP 9.3.1 as the newest fully supported AGP. This reposito
 
 ## Tests
 
-The unit test task exists. The task has no tests. The application has no domain behavior in this issue. Issue #4 adds the test infrastructure and the first behavior test.
+The unit test task exists. This issue adds no tests and no domain behavior. Issue #4 added the test infrastructure and the first behavior test. See `docs/development/testing.md` and ADR 0005.
 
 ## Static analysis
 
@@ -77,7 +77,7 @@ Issue #2 is the bootstrap exception from the parent issue. A pull request needs 
 
 ## Emulator
 
-The initialization host had Android SDK platform 37.0 and Build-Tools 36.0.0 and 37.0.0. The host had no emulator package and no system image. `README.md` records the local emulator procedure. Issue #4 and issue #5 own CI device tests.
+The initialization host had Android SDK platform 37.0 and Build-Tools 36.0.0 and 37.0.0. The host had no emulator package and no system image. `README.md` records the local emulator procedure. Issue #5 added the manual Instrumentation workflow. Issue #4 added the tests that the workflow runs. See ADR 0006 and `docs/development/testing.md`.
 
 ## Placeholder UI
 

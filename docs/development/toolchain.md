@@ -18,7 +18,10 @@ Plugin Portal, services.gradle.org, kotlinlang.org, developer.android.com). All 
 | ktlint | 1.8.0 | `libs.versions.toml` | Run by Spotless. |
 | Spotless | 8.10.4 | `libs.versions.toml` | |
 | Dependency Analysis Gradle Plugin | 3.19.2 | `libs.versions.toml` | `buildHealth`. Latest stable on 2026-10-14. It officially supports AGP 8.10.0 to 9.3.1 and logs a compatibility warning for AGP 9.4.1. The warning is a log line, not a Gradle deprecation; `buildHealth` passes. Tracked in issue #11. |
-| Test libraries | none | — | Issue #4 adds them. |
+| JUnit | 4.13.2 | `libs.versions.toml` | Unit tests and instrumentation tests. |
+| AndroidX Test JUnit | 1.3.0 | `libs.versions.toml` | `androidx.test.ext:junit`. It brings `AndroidJUnitRunner`. |
+| Compose UI test (`ui-test-junit4`) | Compose BOM | `libs.versions.toml` | Resolved to 1.12.1 on 2026-10-14. Tests call the `junit4.v2` rule. |
+| JaCoCo | AGP default | Not pinned | 0.8.14 when checked on 2026-10-14. Report only. No percentage gate. |
 
 ## Vulnerability and dependency tooling
 
