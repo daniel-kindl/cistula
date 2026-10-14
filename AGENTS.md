@@ -21,8 +21,10 @@ file wins. If this file conflicts with the issue, stop and ask.
 12. Do not change unrelated code.
 13. Never expose credentials or personal data in code, logs, fixtures, issues, PRs, or chat.
 14. Record meaningful architecture decisions as ADRs in `docs/decisions/`.
-15. End every implementation task with a pull request to `dev` that links the issue.
-16. In the PR, report the verification results and the open risks. Report a check that you could
+15. Before the pull request, complete a specification review and a standards review. The procedure
+    is `docs/development/agent-workflow.md`. Record both results in the pull request.
+16. End every implementation task with a pull request to `dev` that links the issue.
+17. In the PR, report the verification results and the open risks. Report a check that you could
     not run as **NOT RUN**, never as passed.
 
 Agents do not merge their own PRs and do not approve their own work. A self-review is labeled as a
@@ -38,6 +40,8 @@ self-review. Merges to `main` and releases need the maintainer.
 | `config/` | Detekt and Android Lint configuration. |
 | `eng/` | `verify.sh` (verification) and `format.sh` (formatting). |
 | `docs/` | Architecture, ADRs, development guides. |
+| `.github/` | Issue templates, pull request template, workflows, and rulesets. |
+| `AGENTS.md` | Agent rules for every task. |
 
 There is one application module. Add a module only when an issue needs it, and record it in an
 ADR. See `docs/architecture/README.md`.
@@ -67,10 +71,21 @@ NOT RUN unless you ran them.
 - Write clear, short English. Use ASD-STE100 principles where useful: one instruction per
   sentence, active voice, simple words. This applies to prose, not to Kotlin identifiers or APIs.
 - Update docs in the same PR as the change.
-- ADRs: copy `docs/decisions/0000-template.md`, number sequentially, never rewrite an accepted
-  ADR; supersede it.
+- ADRs: copy `docs/decisions/0000-template.md` and number them in sequence. Never rewrite an
+  accepted ADR. Supersede an accepted ADR with a new ADR.
 - Writing guide: `docs/development/technical-writing.md`.
 
 ## Agent skills
 
-External skills are optional and never required by the build. Issue #6 defines skill precedence.
+External skills are optional. The build does not run them. CI does not run them.
+
+Install a skill on the developer machine. Do not commit a skill directory.
+
+`./eng/verify.sh` fails when git tracks a file at the repository root under `skills/`, `.agents/`, or `.claude/skills/`.
+
+For one repository step, follow the repository procedure. Do not run a second skill for that step.
+
+`/how` and `/why` only read. They do not approve a change.
+
+The registry, the overlap, and the local install notes are in `docs/development/agent-workflow.md`.
+ADR 0007 records the decision.

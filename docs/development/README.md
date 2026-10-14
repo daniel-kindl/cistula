@@ -7,3 +7,4 @@
 | [versioning.md](versioning.md) | Branches, versions, releases |
 | [repository-settings.md](repository-settings.md) | GitHub settings, rulesets, security features |
 | [technical-writing.md](technical-writing.md) | How to write docs |
+| [agent-workflow.md](agent-workflow.md) | Task order, reviews, and skill precedence |

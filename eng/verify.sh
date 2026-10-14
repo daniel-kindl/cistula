@@ -27,6 +27,10 @@ semver=$(sed -n 's/^cistula\.version=//p' gradle.properties)
 if grep -nEi 'ksp|hilt|dagger|room|retrofit|okhttp|work-runtime|workmanager|firebase|analytics|crashlytics' gradle/libs.versions.toml; then
   fail "Feature or tracking dependency found in gradle/libs.versions.toml. Add it only with an approved issue and ADR."
 fi
+# Agent skills stay on the developer machine (ADR 0007). Root paths only.
+if git ls-files | grep -E '^(skills/|\.agents/|\.claude/skills/)'; then
+  fail "Tracked agent skill found at the repository root. Install skills locally. Do not commit them."
+fi
 # No silent suppressions or lint baselines. Exceptions need a reason in config/ and review.
 if grep -rnE '@Suppress(Warnings|Lint)?\(|tools:ignore=|//\s*(ktlint-disable|noinspection)|detekt:disable' \
      --exclude-dir=build --exclude-dir=.gradle --include='*.kt' --include='*.kts' --include='*.xml' app build-logic/convention/src; then
