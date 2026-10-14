@@ -17,6 +17,7 @@
     dependency graphs (Gradle and GitHub Actions) and fails a PR that adds a dependency with a
     known vulnerability (any severity) or a denied license. If the base branch has no Gradle
     snapshot yet, the action reports a snapshot warning and can only compare what the base has.
+    One exception: `allow-ghsas: GHSA-r937-wjx7-w2jp` (KGP 2.4.0 pinned by Gradle's embedded kotlin-dsl, build-logic only); removal is tracked in issue #12.
 - Workflow `Instrumentation` runs the instrumentation tests on an Android API 26 emulator
   (minSdk). The repository has no instrumentation tests yet; issue #4 adds them. It is manual (`workflow_dispatch`) because emulators are slow
   and use many Actions minutes. By default, instrumentation tests are NOT RUN in

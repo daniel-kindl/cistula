@@ -31,7 +31,7 @@ Plugin Portal, services.gradle.org, kotlinlang.org, developer.android.com). All 
   Kotlin, or Android Lint bring with known advisories. They apply to the root build classpath and
   the `androidLintTool` configuration. They do not enter the APK. Remove an entry when the tools
   bring a fixed version. The Kotlin Gradle plugin 2.4.0 that Gradle's embedded Kotlin DSL brings
-  (GHSA-r937-wjx7-w2jp) cannot be constrained from the build.
+  (GHSA-r937-wjx7-w2jp) cannot be constrained from the build. CI allows only that advisory (`allow-ghsas`); issue #12 tracks its removal.
 - See `repository-settings.md`.
 
 ## Update a version
