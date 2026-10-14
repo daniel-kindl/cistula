@@ -20,6 +20,7 @@ build-logic/convention (Gradle convention plugin, build time only)
 - A dependency points from an application module to a library module.
 - Feature dependencies (networking, persistence, DI, background work) need an approved issue and an ADR.
   `eng/verify.sh` rejects known feature and tracking libraries in the version catalog.
+- An agent skill is not a module and not a build dependency. ADR 0007 records that decision.
 
 ## Future considerations (non-binding)
 

@@ -9,6 +9,8 @@
 5. Open a pull request to `dev`. Link the issue (`Closes #123`).
 6. CI must pass. Review threads must be resolved. The PR is squash-merged.
 
+An agent also follows [docs/development/agent-workflow.md](docs/development/agent-workflow.md).
+
 ## Branches
 
 | Branch | Purpose |

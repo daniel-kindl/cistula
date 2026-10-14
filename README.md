@@ -29,7 +29,8 @@ See [docs/development/testing.md](docs/development/testing.md).
 
 ## Contributing
 
-Read `AGENTS.md` and `CONTRIBUTING.md`. Branch from `dev`. Security reports: `SECURITY.md`.
+Read `AGENTS.md` and `CONTRIBUTING.md`. The agent task order is in
+`docs/development/agent-workflow.md`. Branch from `dev`. Security reports: `SECURITY.md`.
 
 ## Emulator
 

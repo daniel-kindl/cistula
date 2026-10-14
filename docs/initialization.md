@@ -1,6 +1,6 @@
 # Initialization decisions
 
-This file records the decisions for issue #2. Later issues changed the tooling: issue #3 added ktlint, Detekt, and Kotlin warnings-as-errors, issue #5 added `./eng/verify.sh` and CI, and issue #7 moved the version to `cistula.version`. The Lint configuration moved from `app/lint.xml` to `config/lint/lint.xml`. Current tooling is in `docs/development/` and `docs/decisions/`. It does not define product behavior. Issue #8 records product scope and architecture.
+This file records the decisions for issue #2. Later issues changed the tooling: issue #3 added ktlint, Detekt, and Kotlin warnings-as-errors, issue #5 added `./eng/verify.sh` and CI, and issue #7 moved the version to `cistula.version`. Issue #6 keeps agent skills outside the build (ADR 0007). The Lint configuration moved from `app/lint.xml` to `config/lint/lint.xml`. Current tooling is in `docs/development/` and `docs/decisions/`. It does not define product behavior. Issue #8 records product scope and architecture.
 
 ## License
 
