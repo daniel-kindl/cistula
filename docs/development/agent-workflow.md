@@ -13,7 +13,7 @@ An implementation task ends with a pull request to `dev`. The agent does not mer
 7. Run `./eng/verify.sh`. Done when the script prints `PASS: all verification steps succeeded.`
 8. Complete the specification review in this document.
 9. Complete the standards review in this document.
-10. Open a pull request to `dev`. Use `.github/PULL_REQUEST_TEMPLATE.md`. The body contains `Closes #<issue>` for this issue only. The body records the verify result and both reviews.
+10. Open a pull request to `dev`. Use `.github/PULL_REQUEST_TEMPLATE.md`. Put `Closes #<issue>` in the body for this issue only. Record the verify result and both reviews in the body.
 11. Stop. The maintainer merges.
 
 Report a command you did not run as **NOT RUN**.
@@ -80,7 +80,7 @@ A later catalog release does not change this decision.
 | --- | --- | --- | --- |
 | Failing test, then code | `tdd` | `tdd` | `AGENTS.md` rule 4 |
 | Specification review and standards review | `code-review` | `interrogate` | The reviews in this document |
-| ADR | `domain-modeling` | domain-model principle | `docs/decisions/` |
+| ADR | `domain-modeling` | none | `docs/decisions/` |
 | Technical English | `writing-for-agents` | `technical-writing` | `docs/development/technical-writing.md` |
 | Runtime explanation | none | `how` | Only read. It does not approve a change. |
 | Decision rationale | none | `why` | Only read. ADRs and git history stay the record. |
@@ -88,6 +88,8 @@ A later catalog release does not change this decision.
 | Issue tracker setup | `setup-matt-pocock-skills` | `setup-pstack` | Do not run setup in this repository. |
 
 `code-review` uses a specification axis and a standards axis. `interrogate` asks other models to break a diff. Neither skill replaces the reviews in this document.
+
+pstack `principle-model-the-domain` encodes the domain in a data structure. It does not write an ADR.
 
 `setup-matt-pocock-skills` writes `docs/agents/`. The skill can select a different issue tracker. Do not run it in this repository. Issues stay on GitHub. ADRs stay in `docs/decisions/`.
 
@@ -118,8 +120,10 @@ Do not run an install command as part of a repository task. Do not commit the in
 On 2026-10-14 the mattpocock/skills README showed this command:
 
 ```text
-npx skills@latest add mattpocock/skills
+npx skills@latest add mattpocock/skills -a <agent>
 ```
+
+The README says to omit `-a` to let the installer ask for the agent.
 
 On 2026-10-14 the pstack README showed this Cursor command:
 

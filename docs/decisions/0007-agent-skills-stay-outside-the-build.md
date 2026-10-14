@@ -6,7 +6,7 @@
 
 ## Context
 
-An agent can load optional skills from the developer machine. The build must succeed on a clean checkout. A clean checkout has the JDK and the Android SDK. A clean checkout has no skill catalog.
+An agent can load optional skills from the developer machine. The build must succeed on a clean checkout. The machine needs the JDK and the Android SDK. A clean checkout has no skill catalog.
 
 This repository evaluated two public catalogs on 2026-10-14:
 
