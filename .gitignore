@@ -17,3 +17,8 @@ captures/
 *.keystore
 *.jks
 output-metadata.json
+
+# Agent skills stay on the developer machine (ADR 0007).
+/.agents/
+/.claude/skills/
+/skills/

@@ -15,7 +15,7 @@ import dev.danielkindl.cistula.R
 import dev.danielkindl.cistula.ui.theme.CistulaTheme
 
 @Composable
-fun CistulaApp() {
+fun CistulaApp(content: CistulaAppContent) {
     Scaffold { innerPadding ->
         Box(
             modifier =
@@ -25,7 +25,7 @@ fun CistulaApp() {
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = stringResource(R.string.app_name),
+                text = content.title,
                 style = MaterialTheme.typography.headlineMedium,
             )
         }
@@ -36,6 +36,6 @@ fun CistulaApp() {
 @Composable
 private fun CistulaAppPreview() {
     CistulaTheme {
-        CistulaApp()
+        CistulaApp(content = CistulaAppContent(title = stringResource(R.string.app_name)))
     }
 }

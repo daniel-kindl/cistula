@@ -10,3 +10,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 - M0 repository bootstrap: Gradle build with the `app` module, `build-logic`, quality gates
   (ktlint, Detekt, Android Lint, dependency analysis), `eng/verify.sh`, CI, and documentation.
+- JVM unit tests, Compose instrumentation tests, shared test fixtures, and JaCoCo coverage
+  reports. Coverage has no percentage gate.
+- Agent workflow, skill precedence, and a verification check that rejects a tracked skill
+  directory at the repository root.

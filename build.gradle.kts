@@ -60,7 +60,9 @@ dependencies {
 val detektSources =
     listOf("app", "build-logic/convention")
         .flatMap { module ->
-            listOf("main", "test", "androidTest").flatMap { set -> listOf("$module/src/$set/kotlin", "$module/src/$set/java") }
+            listOf("main", "test", "androidTest", "testFixtures").flatMap { set ->
+                listOf("$module/src/$set/kotlin", "$module/src/$set/java")
+            }
         }.map(::file)
         .filter(File::isDirectory)
 
