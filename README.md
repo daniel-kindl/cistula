@@ -23,7 +23,9 @@ Single tasks: `./gradlew :app:assembleDebug`, `./gradlew :app:assembleRelease`,
 
 `assembleRelease` writes an unsigned APK. This repository has no signing config.
 
-The unit test task has no tests. Issue #4 adds the first behavior test.
+`./eng/verify.sh` runs the unit tests and writes the coverage report to
+`app/build/reports/coverage/test/debug/index.html`. There is no coverage percentage gate.
+See [docs/development/testing.md](docs/development/testing.md).
 
 ## Contributing
 
@@ -50,7 +52,8 @@ The windowed device boots with `-gpu host`.
 On another machine, use `sdkmanager --list` to find a system image for its CPU.
 Install `emulator` and that image with `sdkmanager`, then create an AVD with
 `avdmanager create avd`. Use an API 26 image to test the minimum supported API.
-Issue #4 and issue #5 own CI device tests.
+CI device tests run in the manual Instrumentation workflow. See
+[docs/development/testing.md](docs/development/testing.md) and ADR 0006.
 
 ## License
 
