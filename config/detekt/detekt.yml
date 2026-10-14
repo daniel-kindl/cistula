@@ -27,7 +27,7 @@ style:
     active: true
   UnusedPrivateMember:
     # Compose previews are private and only the IDE calls them.
-    ignoreAnnotated: ['Preview']
+    ignoreAnnotated: ['androidx.compose.ui.tooling.preview.Preview']
 
 naming:
   FunctionNaming:
