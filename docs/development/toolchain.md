@@ -17,7 +17,7 @@ Plugin Portal, services.gradle.org, kotlinlang.org, developer.android.com). All 
 | Detekt (CLI) | 1.23.8 | `libs.versions.toml` | Detekt 2 is alpha. |
 | ktlint | 1.8.0 | `libs.versions.toml` | Run by Spotless. |
 | Spotless | 8.10.4 | `libs.versions.toml` | |
-| Dependency Analysis Gradle Plugin | 3.19.2 | `libs.versions.toml` | `buildHealth`. |
+| Dependency Analysis Gradle Plugin | 3.19.2 | `libs.versions.toml` | `buildHealth`. Latest stable on 2026-10-14. It officially supports AGP 8.10.0 to 9.3.1 and logs a compatibility warning for AGP 9.4.1. The warning is a log line, not a Gradle deprecation; `buildHealth` passes. Tracked in issue #11. |
 | Test libraries | none | — | Issue #4 adds them. |
 
 ## Vulnerability and dependency tooling
