@@ -65,10 +65,26 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 }
             }
 
+            constrainLintToolBouncyCastle(catalog)
+
             extensions.configure<KotlinAndroidProjectExtension> {
                 compilerOptions {
                     allWarningsAsErrors.set(true)
                     jvmTarget.set(JvmTarget.fromTarget(jvmTargetVersion.toString()))
+                }
+            }
+        }
+    }
+
+    /**
+     * The Android Lint tool brings Bouncy Castle 1.80.2, which has known advisories. Lint is build
+     * time only. See the bouncycastle entry in gradle/libs.versions.toml.
+     */
+    private fun Project.constrainLintToolBouncyCastle(catalog: VersionCatalog) {
+        configurations.configureEach {
+            if (name == LINT_TOOL_CONFIGURATION) {
+                BOUNCY_CASTLE_ALIASES.forEach { alias ->
+                    dependencyConstraints.addLater(catalog.findLibrary(alias).get().map { project.dependencies.constraints.create(it) })
                 }
             }
         }
@@ -82,5 +98,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
     private companion object {
         const val APPLICATION_ID = "dev.danielkindl.cistula"
+        const val LINT_TOOL_CONFIGURATION = "androidLintTool"
+        val BOUNCY_CASTLE_ALIASES = listOf("bouncycastle-bcprov", "bouncycastle-bcpkix", "bouncycastle-bcutil")
     }
 }
