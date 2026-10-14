@@ -16,4 +16,12 @@
     <issue id="AndroidGradlePluginVersion">
         <ignore path="**/gradle-wrapper.properties" />
     </issue>
+    <!--
+      Coverage uses the JaCoCo agent. That jar references java.lang.management and
+      javax.management. Android does not include those packages. The application does not
+      call the agent. The finding is in the agent jar, not in this repository.
+    -->
+    <issue id="InvalidPackage">
+        <ignore path="**/org.jacoco.agent-*-runtime.jar" />
+    </issue>
 </lint>
