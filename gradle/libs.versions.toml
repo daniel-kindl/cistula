@@ -1,8 +1,20 @@
+# Single source of truth for every plugin and library version.
+# Rationale and compatibility notes: docs/development/toolchain.md
 [versions]
 agp = "9.4.1"
 kotlin = "2.4.21"
+detekt = "1.23.8"
+spotless = "8.10.4"
+ktlint = "1.8.0"
+dependency-analysis = "3.19.2"
 activityCompose = "1.13.0"
 composeBom = "2026.09.00"
+
+# Android SDK levels and JVM target (not artifacts, read by build-logic).
+android-compile-sdk = "37"
+android-target-sdk = "37"
+app-min-sdk = "26"
+jvm-target = "17"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -11,8 +23,17 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+# Detekt runs through its CLI (see root build.gradle.kts and ADR 0003).
+detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
+
+# Build-logic classpath only.
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+compose-compiler-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
+cistula-android-application = { id = "cistula.android.application" }

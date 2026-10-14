@@ -1,0 +1,31 @@
+name: Technical task
+description: Tooling, CI, refactoring, research, or documentation.
+title: "chore: "
+labels: ["type:chore"]
+body:
+  - type: textarea
+    id: objective
+    attributes: { label: Objective }
+    validations: { required: true }
+  - type: textarea
+    id: scope
+    attributes: { label: Scope }
+    validations: { required: true }
+  - type: textarea
+    id: exclusions
+    attributes: { label: Explicit exclusions }
+    validations: { required: true }
+  - type: textarea
+    id: acceptance
+    attributes: { label: Acceptance criteria }
+    validations: { required: true }
+  - type: textarea
+    id: tests
+    attributes: { label: Required tests }
+  - type: textarea
+    id: dependencies
+    attributes: { label: Dependencies }
+  - type: textarea
+    id: verification
+    attributes: { label: Verification requirements, value: "`./eng/verify.sh` passes. CI passes." }
+    validations: { required: true }

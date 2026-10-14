@@ -1,33 +1,17 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.cistula.android.application)
 }
 
 android {
     namespace = "dev.danielkindl.cistula"
-    compileSdk {
-        version = release(37) {
-            minorApiLevel = 0
-        }
-    }
-
     defaultConfig {
-        applicationId = "dev.danielkindl.cistula"
         minSdk {
-            version = release(26)
-        }
-        targetSdk {
-            version = release(37)
-        }
-        versionCode = 1
-        versionName = "0.0.0"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
+            version =
+                release(
+                    libs.versions.app.min.sdk
+                        .get()
+                        .toInt(),
+                )
         }
     }
 
@@ -35,21 +19,6 @@ android {
         jniLibs {
             keepDebugSymbols += "**/libandroidx.graphics.path.so"
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    buildFeatures {
-        compose = true
-    }
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 

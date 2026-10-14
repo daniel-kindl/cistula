@@ -1,0 +1,35 @@
+# Detekt configuration on top of the default rule set (buildUponDefaultConfig = true).
+# Formatting is owned by ktlint (Spotless), so the detekt-formatting plugin is not used.
+config:
+  validation: true
+  warningsAsErrors: true
+
+build:
+  maxIssues: 0
+
+style:
+  UnusedImports:
+    active: true
+  WildcardImport:
+    active: true
+    excludeImports: []
+  ForbiddenComment:
+    active: true
+  MaxLineLength:
+    maxLineLength: 140
+  UnnecessaryAbstractClass:
+    active: true
+  VarCouldBeVal:
+    active: true
+  ExplicitItLambdaParameter:
+    active: true
+  MandatoryBracesLoops:
+    active: true
+  UnusedPrivateMember:
+    # Compose previews are private and only the IDE calls them.
+    ignoreAnnotated: ['Preview']
+
+naming:
+  FunctionNaming:
+    # Compose UI functions use PascalCase by convention.
+    ignoreAnnotated: ['Composable']

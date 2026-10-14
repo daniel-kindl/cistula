@@ -6,23 +6,28 @@ Cistula is a native Android application for a personal book collection. The appl
 
 You need all of the following items.
 
-- JDK 17 or later. The tested JDK is 25.0.4.1. The JDK policy is in `docs/initialization.md`.
+- JDK 17 or later. CI uses Temurin 21. JDK 25.0.4.1 and Temurin 21.0.12.1 were tested locally. The JDK policy is in `docs/initialization.md`.
 - Android SDK platform `android-37.0`.
 - Android SDK Build-Tools 36.0.0.
 - An SDK location. Set `ANDROID_HOME` to the SDK directory, or create `local.properties` with `sdk.dir`. Do not commit `local.properties`.
 
-## Build
+## Verify
 
-Run these commands from the repository root.
+Run `./eng/verify.sh` from the repository root. It is the same command as CI and never changes
+files. It checks the Gradle wrapper, repository policies, ktlint formatting (Spotless), Detekt,
+Android Lint (warnings are errors), debug, release, and instrumentation-test builds, unit tests, and
+dependency health. Run `./eng/format.sh` to apply formatting.
 
-1. Run `./gradlew :app:assembleDebug`.
-2. Run `./gradlew :app:assembleRelease`.
-3. Run `./gradlew :app:lint`.
-4. Run `./gradlew :app:testDebugUnitTest`.
+Single tasks: `./gradlew :app:assembleDebug`, `./gradlew :app:assembleRelease`,
+`./gradlew :app:lintDebug`, `./gradlew :app:testDebugUnitTest`.
 
 `assembleRelease` writes an unsigned APK. This repository has no signing config.
 
 The unit test task has no tests. Issue #4 adds the first behavior test.
+
+## Contributing
+
+Read `AGENTS.md` and `CONTRIBUTING.md`. Branch from `dev`. Security reports: `SECURITY.md`.
 
 ## Emulator
 
@@ -53,4 +58,5 @@ Copyright 2026 Daniel Kindl. The license is Apache-2.0. The terms are in `LICENS
 
 ## Decisions
 
-Toolchain, SDK, and branch decisions are in `docs/initialization.md`.
+Initial toolchain, SDK, and branch decisions are in `docs/initialization.md`. ADRs are in
+`docs/decisions/`. Architecture: `docs/architecture/README.md`. Development guides: `docs/development/`.

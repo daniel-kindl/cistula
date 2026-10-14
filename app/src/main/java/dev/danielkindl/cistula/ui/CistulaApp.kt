@@ -18,9 +18,10 @@ import dev.danielkindl.cistula.ui.theme.CistulaTheme
 fun CistulaApp() {
     Scaffold { innerPadding ->
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
             contentAlignment = Alignment.Center,
         ) {
             Text(
