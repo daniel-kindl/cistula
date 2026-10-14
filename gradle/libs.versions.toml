@@ -1,8 +1,28 @@
+# Single source of truth for every plugin and library version.
+# Rationale and compatibility notes: docs/development/toolchain.md
 [versions]
 agp = "9.4.1"
 kotlin = "2.4.21"
+detekt = "1.23.8"
+spotless = "8.10.4"
+ktlint = "1.8.0"
+dependency-analysis = "3.19.2"
+# Build-time security constraints only: the root build classpath and the Android Lint tool.
+# AGP, Kotlin, and Lint bring older versions with known advisories. Nothing here enters the APK.
+# Remove an entry when the tools bring a fixed version. See docs/development/toolchain.md.
+bouncycastle = "1.86" # GHSA-9pwp-9qqc-pr26, GHSA-qp49-qgx5-5m26, GHSA-c3fc-8qff-9hwx (fixed in 1.85)
+jose4j = "0.9.6" # GHSA-3677-xxcr-wjqv
+jdom2 = "2.0.6.1" # GHSA-2363-cqg2-863c
+httpclient = "4.5.14" # GHSA-7r82-7xv7-xcpj (fixed in 4.5.13)
+commons-lang3 = "3.18.0" # GHSA-j288-q9x7-2f5v
 activityCompose = "1.13.0"
 composeBom = "2026.09.00"
+
+# Android SDK levels and JVM target (not artifacts, read by build-logic).
+android-compile-sdk = "37"
+android-target-sdk = "37"
+app-min-sdk = "26"
+jvm-target = "17"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -11,8 +31,27 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+# Detekt runs through its CLI (see root build.gradle.kts and ADR 0003).
+detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
+
+# Build-logic classpath only.
+bouncycastle-bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }
+bouncycastle-bcpkix = { module = "org.bouncycastle:bcpkix-jdk18on", version.ref = "bouncycastle" }
+bouncycastle-bcutil = { module = "org.bouncycastle:bcutil-jdk18on", version.ref = "bouncycastle" }
+jose4j = { module = "org.bitbucket.b_c:jose4j", version.ref = "jose4j" }
+jdom2 = { module = "org.jdom:jdom2", version.ref = "jdom2" }
+httpclient = { module = "org.apache.httpcomponents:httpclient", version.ref = "httpclient" }
+commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang3" }
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+compose-compiler-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+
+[bundles]
+build-tool-security-constraints = ["bouncycastle-bcprov", "bouncycastle-bcpkix", "bouncycastle-bcutil", "jose4j", "jdom2", "httpclient", "commons-lang3"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
+cistula-android-application = { id = "cistula.android.application" }

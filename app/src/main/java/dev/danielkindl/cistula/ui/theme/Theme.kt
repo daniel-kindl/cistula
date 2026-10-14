@@ -8,11 +8,12 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun CistulaTheme(content: @Composable () -> Unit) {
-    val colorScheme = if (isSystemInDarkTheme()) {
-        darkColorScheme()
-    } else {
-        lightColorScheme()
-    }
+    val colorScheme =
+        if (isSystemInDarkTheme()) {
+            darkColorScheme()
+        } else {
+            lightColorScheme()
+        }
 
     MaterialTheme(
         colorScheme = colorScheme,

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Android Lint configuration. All checks are on (checkAllWarnings) and warnings are errors.
+  Every disabled check below has a reason. Do not add entries without one.
+-->
+<lint>
+    <!-- Version freshness checks depend on network data and the current date, so they are not
+         deterministic. Dependabot handles version updates instead. -->
+    <issue id="GradleDependency" severity="ignore" />
+    <issue id="NewerVersionAvailable" severity="ignore" />
+    <!--
+      Kotlin 2.4.21 fully supports Gradle through 9.7.0. Gradle 9.7.1 is the newest release on
+      that line. The check reports Gradle 9.8.1, which is outside that support line.
+      The ignore is limited to the wrapper properties file (moved from app/lint.xml).
+    -->
+    <issue id="AndroidGradlePluginVersion">
+        <ignore path="**/gradle-wrapper.properties" />
+    </issue>
+</lint>
