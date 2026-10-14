@@ -52,8 +52,8 @@ step 5 "Android Lint (app)"
 step 6 "Compile Android app (debug, release, instrumentation tests)"
 "${GRADLE[@]}" :app:assembleDebug :app:assembleRelease :app:assembleDebugAndroidTest
 
-step 7 "Unit tests"
-"${GRADLE[@]}" :app:testDebugUnitTest
+step 7 "Unit tests and unit-test coverage report (no coverage threshold)"
+"${GRADLE[@]}" :app:createDebugUnitTestCoverageReport
 
 step 8 "Dependency analysis (unused and misconfigured dependencies)"
 "${GRADLE[@]}" buildHealth
