@@ -11,7 +11,7 @@ dependency-analysis = "3.19.2"
 # AGP, Kotlin, and Lint bring older versions with known advisories. Nothing here enters the APK.
 # Remove an entry when the tools bring a fixed version. See docs/development/toolchain.md.
 bouncycastle = "1.86" # GHSA-9pwp-9qqc-pr26, GHSA-qp49-qgx5-5m26, GHSA-c3fc-8qff-9hwx (fixed in 1.85)
-jose4j = "0.9.6" # GHSA-3677-xxcr-wjqv
+jose4j = "0.9.7" # GHSA-3677-xxcr-wjqv
 jdom2 = "2.0.6.1" # GHSA-2363-cqg2-863c
 httpclient = "4.5.14" # GHSA-7r82-7xv7-xcpj (fixed in 4.5.13)
 commons-lang3 = "3.21.0" # GHSA-j288-q9x7-2f5v
