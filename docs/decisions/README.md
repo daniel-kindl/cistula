@@ -9,5 +9,6 @@
 | [0005](0005-testing-strategy.md) | Testing strategy | Accepted |
 | [0006](0006-ci-strategy.md) | CI strategy | Accepted |
 | [0007](0007-agent-skills-stay-outside-the-build.md) | Keep agent skills outside the build | Accepted |
+| [0008](0008-clarify-dependency-review-in-ci.md) | Clarify dependency review in CI | Proposed |
 
 New ADR: copy [0000-template.md](0000-template.md).
