@@ -1,6 +1,6 @@
 # Repository settings
 
-State on 2026-10-14. The repository is **public**. Nobody changed the repository visibility.
+State checked on 2026-10-17 during the M0 handoff. The repository is **public**.
 
 ## Applied
 
@@ -17,7 +17,7 @@ State on 2026-10-14. The repository is **public**. Nobody changed the repository
 | Secret scanning | On |
 | Secret scanning push protection | On |
 | Private vulnerability reporting | On |
-| Code scanning (CodeQL default setup) | Configured for `java-kotlin` |
+| Code scanning (CodeQL default setup) | Configured for `actions` and `java-kotlin` |
 | Dependency review | `dependency-review` CI job on PRs |
 
 ## Rulesets
@@ -36,19 +36,11 @@ for b in main dev; do
 done
 ```
 
-## Not applied yet
+## CodeQL
 
-| Feature | API call | Response |
-| --- | --- | --- |
-| CodeQL for `actions` | `PATCH /repos/{repo}/code-scanning/default-setup` with `java-kotlin` and `actions` | 422 "One or more languages you selected are not present in the repository." |
-
-The default branch (`main`) has no workflow files yet. After the M0 tooling reaches `main`, add
-`actions`:
-
-```sh
-gh api -X PATCH repos/daniel-kindl/cistula/code-scanning/default-setup \
-  -f state=configured -f query_suite=default -f 'languages[]=java-kotlin' -f 'languages[]=actions'
-```
+The live default setup enables both `actions` and `java-kotlin`. PR #19 brought the workflow
+files to `main` on 2026-10-14. The earlier attempt to enable `actions` before that promotion
+returned HTTP 422. That setup limitation no longer applies.
 
 If CodeQL default setup fails to build Kotlin, use an advanced `codeql.yml` workflow with
 `build-mode: manual` and `./gradlew :app:assembleDebug`.

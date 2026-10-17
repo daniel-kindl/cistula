@@ -50,4 +50,4 @@ Mark breaking changes with `!` (`feat(app)!: ...`).
 
 ## Local setup
 
-See [README.md](README.md#prerequisites).
+See [README.md](README.md#requirements).

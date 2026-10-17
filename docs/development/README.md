@@ -8,3 +8,4 @@
 | [repository-settings.md](repository-settings.md) | GitHub settings, rulesets, security features |
 | [technical-writing.md](technical-writing.md) | How to write docs |
 | [agent-workflow.md](agent-workflow.md) | Task order, reviews, and skill precedence |
+| [m0-handoff.md](m0-handoff.md) | Fresh-checkout evidence and remaining M0 acceptance gaps |
