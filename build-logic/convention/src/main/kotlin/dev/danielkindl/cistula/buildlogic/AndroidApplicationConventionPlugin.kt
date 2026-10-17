@@ -43,9 +43,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     versionName = appVersion.name
                 }
                 buildTypes {
-                    getByName("release") {
-                        isMinifyEnabled = false
-                    }
+                    getByName("release").isMinifyEnabled = false
                 }
                 compileOptions {
                     sourceCompatibility = JavaVersion.toVersion(jvmTargetVersion)
@@ -82,9 +80,9 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
      */
     private fun Project.constrainLintToolDependencies(catalog: VersionCatalog) {
         val constraints = catalog.findBundle(SECURITY_CONSTRAINTS_BUNDLE).get()
-        configurations.configureEach {
-            if (name == LINT_TOOL_CONFIGURATION) {
-                dependencyConstraints.addAllLater(
+        configurations.configureEach { configuration ->
+            if (configuration.name == LINT_TOOL_CONFIGURATION) {
+                configuration.dependencyConstraints.addAllLater(
                     constraints.map { libraries -> libraries.map { project.dependencies.constraints.create(it) } },
                 )
             }

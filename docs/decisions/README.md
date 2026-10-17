@@ -11,5 +11,6 @@
 | [0007](0007-agent-skills-stay-outside-the-build.md) | Keep agent skills outside the build | Accepted |
 | [0008](0008-clarify-dependency-review-in-ci.md) | Clarify dependency review in CI | Proposed |
 | [0009](0009-promote-dev-with-a-temporary-branch.md) | Promote dev with a temporary branch | Proposed |
+| [0010](0010-compile-build-logic-with-catalog-kotlin.md) | Compile build logic with catalog Kotlin | Proposed |
 
 New ADR: copy [0000-template.md](0000-template.md).

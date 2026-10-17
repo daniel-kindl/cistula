@@ -95,10 +95,6 @@ jobs:
       - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
         with:
           fail-on-severity: low
-          # GHSA-r937-wjx7-w2jp: kotlin-gradle-plugin 2.4.0 is pinned by Gradle 9.7.1's embedded
-          # kotlin-dsl (build-logic compilation only, not in the APK; the app uses KGP 2.4.21).
-          # Remove with issue #12.
-          allow-ghsas: GHSA-r937-wjx7-w2jp
           retry-on-snapshot-warnings: true
           retry-on-snapshot-warnings-timeout: 300
           deny-licenses: GPL-2.0-only, GPL-3.0-only, AGPL-3.0-only
