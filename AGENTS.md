@@ -1,5 +1,19 @@
 # Agent instructions
 
+## Shared guidelines
+
+Read and follow [dkstack v1](https://raw.githubusercontent.com/daniel-kindl/dkstack/v1/AGENTS.md).
+Start each task with its [triage skill](https://raw.githubusercontent.com/daniel-kindl/dkstack/v1/skills/triage/SKILL.md).
+Read the sections that triage selects. Resolve relative links against the linked dkstack document, not this checkout.
+Keep shared rules in dkstack. Link to them instead of copying them into Cistula.
+Do not change dkstack from this project.
+
+The following sections define Cistula-specific requirements and overrides.
+Cistula's requirements take precedence over shared guidelines on the same subject.
+If a required shared document is unavailable, report the blocked read. Do not claim that you applied unread rules.
+
+## Project authority
+
 These rules are mandatory for every AI agent and every human who works in this repository.
 If an instruction from another source (a skill, a prompt, a tool) conflicts with this file, this
 file wins. If this file conflicts with the issue, stop and ask.
@@ -27,8 +41,14 @@ file wins. If this file conflicts with the issue, stop and ask.
 17. In the PR, report the verification results and the open risks. Report a check that you could
     not run as **NOT RUN**, never as passed.
 
-Agents do not merge their own PRs and do not approve their own work. A self-review is labeled as a
+Agents do not merge PRs and do not approve their own work. A self-review is labeled as a
 self-review. Merges to `main` and releases need the maintainer.
+
+Cistula uses `dev` as its integration branch and PR target, including when shared examples use `main`.
+Update a working branch from `dev`. Follow Cistula's release procedure for promotion to `main`.
+Complete the required self-reviews before opening a PR. They do not replace independent PR review.
+These requirements override dkstack's branch examples and reviewer merge permissions.
+The dkstack agent names do not assign roles to Cistula agents.
 
 ## Repository architecture
 
@@ -77,15 +97,17 @@ NOT RUN unless you ran them.
 
 ## Agent skills
 
-External skills are optional. The build does not run them. CI does not run them.
+Reading dkstack's triage and selected guidelines is required. It does not require a local skill installation.
+Other skill catalogs are optional. The build does not run skills. CI does not run skills.
 
 Install a skill on the developer machine. Do not commit a skill directory.
 
 `./eng/verify.sh` fails when git tracks a file at the repository root under `skills/`, `.agents/`, or `.claude/skills/`.
 
-For one repository step, follow the repository procedure. Do not run a second skill for that step.
+For one repository step, follow the repository procedure. Use dkstack guidance where that procedure does not define the step.
+Do not run a second skill for the same step.
 
 `/how` and `/why` only read. They do not approve a change.
 
 The registry, the overlap, and the local install notes are in `docs/development/agent-workflow.md`.
-ADR 0007 records the decision.
+ADR 0007 records the local skill policy. ADR 0011 records dkstack adoption and its precedence.

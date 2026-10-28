@@ -2,6 +2,20 @@
 
 An implementation task ends with a pull request to `dev`. The agent does not merge that pull request. The agent does not approve that pull request.
 
+## Shared guidelines
+
+[dkstack v1](https://raw.githubusercontent.com/daniel-kindl/dkstack/v1/AGENTS.md) is the shared guideline source.
+Start with its [triage skill](https://raw.githubusercontent.com/daniel-kindl/dkstack/v1/skills/triage/SKILL.md).
+Read the sections that triage selects. Resolve relative links against their dkstack source documents.
+Do not copy the shared rules into this repository.
+
+Cistula's requirements override shared guidance on the same subject.
+Use `dev` for integration and PRs, including when a shared example uses `main`.
+Agents do not merge PRs. Required self-reviews do not replace independent PR review.
+The maintainer controls merges to `main` and releases.
+The dkstack role names do not assign Cistula agents.
+See [ADR 0011](../decisions/0011-adopt-dkstack-guidelines.md).
+
 ## Order
 
 1. Read the assigned issue. Done when you can name the scope, the exclusions, and the acceptance criteria.
@@ -57,7 +71,9 @@ Read `docs/architecture/README.md` before a design change.
 - `./eng/verify.sh` rejects a known feature library or tracking library in `gradle/libs.versions.toml`.
 - An agent skill is not a module. An agent skill is not a build dependency. ADR 0007 records that decision.
 
-## Skill registry
+## Optional skill registry
+
+The following catalogs are optional local tools. They do not replace the required dkstack reads.
 
 This repository evaluated two public catalogs on 2026-10-14. This repository does not vendor either catalog.
 
@@ -102,7 +118,8 @@ Apply the first matching row.
 | Conflict | Action |
 | --- | --- |
 | `AGENTS.md` and the assigned issue disagree | Stop and ask. |
-| A skill, a prompt, or a tool instruction disagrees with `AGENTS.md` | Follow `AGENTS.md`. |
+| Shared dkstack guidance, a skill, a prompt, or a tool instruction disagrees with `AGENTS.md` | Follow `AGENTS.md`. |
+| Shared dkstack guidance disagrees with a Cistula ADR or development procedure | Follow the Cistula requirement. |
 | A skill disagrees with an accepted ADR | Follow the ADR. |
 | A skill disagrees with a guide in `docs/development/` | Follow the guide. |
 | Two skills match one repository step | Follow the repository procedure. Do not run the second skill. |
@@ -111,7 +128,8 @@ A skill may suggest a method. A skill does not add scope. A skill does not add a
 
 ## Local installation
 
-Installation is optional. A clean checkout does not need a skill catalog.
+Installation is optional. A clean checkout does not need an installed skill catalog.
+Agents read the required dkstack documents through their links. Gradle and CI do not fetch those documents.
 
 Do not run an install command as part of a repository task. Do not commit the installed files.
 
