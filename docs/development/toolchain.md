@@ -4,12 +4,15 @@ Versions checked on 2026-10-14 against official sources (Google Maven, Maven Cen
 Plugin Portal, services.gradle.org, kotlinlang.org, developer.android.com). All are stable releases.
 
 The convention build's Kotlin plugin resolution was rechecked on 2026-10-17 for issue #12.
+AGP was updated to 9.5.0 on 2026-10-28 for issue #27 after CI Lint rejected 9.4.1.
+The [AGP 9.5 compatibility table](https://developer.android.com/build/releases/agp-9-5-0-release-notes#compatibility)
+requires Gradle 9.6.0+, JDK 17+, and Build-Tools 36.0.0. The existing toolchain meets those requirements.
 
 | Tool | Version | Source of truth | Notes |
 | --- | --- | --- | --- |
-| JDK | 21 in CI (Temurin 21.0.12.1 used locally) | CI `setup-java` | AGP 9.4 needs JDK 17+. Bytecode target 17. |
-| Gradle | 9.7.1 | `gradle/wrapper/gradle-wrapper.properties` | Distribution SHA-256 pinned. 9.8.1 not used: AGP 9.4.1 triggers its deprecations. |
-| Android Gradle Plugin | 9.4.1 | `libs.versions.toml` | Needs Gradle 9.6+, supports up to API 37. Built-in Kotlin. |
+| JDK | 21 in CI (Temurin 21.0.12.1 used locally) | CI `setup-java` | AGP 9.5 needs JDK 17+. Bytecode target 17. |
+| Gradle | 9.7.1 | `gradle/wrapper/gradle-wrapper.properties` | Distribution SHA-256 pinned. This fix retains the existing Gradle version. |
+| Android Gradle Plugin | 9.5.0 | `libs.versions.toml` | Needs Gradle 9.6.0+, supports up to API 37. Built-in Kotlin. |
 | Kotlin | 2.4.21 | `libs.versions.toml` | Application, Compose compiler, and convention build. See ADR 0010. |
 | compileSdk / targetSdk | 37 | `libs.versions.toml` | Platform `android-37.0`. |
 | minSdk | 26 | `libs.versions.toml` | See ADR 0002. |
@@ -19,7 +22,7 @@ The convention build's Kotlin plugin resolution was rechecked on 2026-10-17 for 
 | Detekt (CLI) | 1.23.8 | `libs.versions.toml` | Detekt 2 is alpha. |
 | ktlint | 1.8.0 | `libs.versions.toml` | Run by Spotless. |
 | Spotless | 8.10.4 | `libs.versions.toml` | |
-| Dependency Analysis Gradle Plugin | 3.19.2 | `libs.versions.toml` | `buildHealth`. Latest stable on 2026-10-14. It officially supports AGP 8.10.0 to 9.3.1 and logs a compatibility warning for AGP 9.4.1. The warning is a log line, not a Gradle deprecation; `buildHealth` passes. Tracked in issue #11. |
+| Dependency Analysis Gradle Plugin | 3.19.2 | `libs.versions.toml` | `buildHealth`. Latest stable on 2026-10-14. It officially supports AGP 8.10.0 to 9.3.1 and logs a compatibility warning for AGP 9.5.0. The warning is a log line, not a Gradle deprecation; `buildHealth` passes. Tracked in issue #11. |
 | JUnit | 4.13.2 | `libs.versions.toml` | Unit tests and instrumentation tests. |
 | AndroidX Test JUnit | 1.3.0 | `libs.versions.toml` | `androidx.test.ext:junit`. It brings `AndroidJUnitRunner`. |
 | Compose UI test (`ui-test-junit4`) | Compose BOM | `libs.versions.toml` | Resolved to 1.12.1 on 2026-10-14. Tests call the `junit4.v2` rule. |

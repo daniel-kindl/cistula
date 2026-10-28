@@ -1,7 +1,7 @@
 # Single source of truth for every plugin and library version.
 # Rationale and compatibility notes: docs/development/toolchain.md
 [versions]
-agp = "9.4.1"
+agp = "9.5.0"
 kotlin = "2.4.21"
 detekt = "1.23.8"
 spotless = "8.10.4"
