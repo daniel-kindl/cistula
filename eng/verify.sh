@@ -23,10 +23,9 @@ echo "gradle-wrapper.jar matches official Gradle ${version} checksum."
 step 2 "Repository configuration checks"
 semver=$(sed -n 's/^cistula\.version=//p' gradle.properties)
 [[ "$semver" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] || fail "cistula.version '$semver' is not MAJOR.MINOR.PATCH."
-# Feature dependencies need an approved issue and an ADR before they enter the build.
-if grep -nEi 'ksp|hilt|dagger|room|retrofit|okhttp|work-runtime|workmanager|firebase|analytics|crashlytics' gradle/libs.versions.toml; then
-  fail "Feature or tracking dependency found in gradle/libs.versions.toml. Add it only with an approved issue and ADR."
-fi
+# Feature dependencies need an approved issue and an ADR. See ADR 0014 for storage approvals.
+./eng/check-feature-dependencies.sh
+./eng/check-feature-dependencies-test.sh
 # Agent skills stay on the developer machine (ADR 0007). Root paths only.
 if git ls-files | grep -E '^(skills/|\.agents/|\.claude/skills/)'; then
   fail "Tracked agent skill found at the repository root. Install skills locally. Do not commit them."
