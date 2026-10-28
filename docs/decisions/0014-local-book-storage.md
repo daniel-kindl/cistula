@@ -16,6 +16,7 @@ Use Room with the Android SQLite implementation in the existing `app` module.
 Use KSP to generate checked DAO implementations. Add coroutines for suspend operations and `Flow`.
 Use coroutines-test and AndroidX Test Core for deterministic device tests.
 Versions stay in the version catalog. The [toolchain guide](../development/toolchain.md) lists versions and sources.
+Constrain Room code generation to patched Guava for GHSA-xxph-c9ww-hj94. This constraint does not add Guava to the APK.
 No HTTP, synchronization, dependency injection, or serialization library is required.
 
 Keep `BookRepository` in the book package. Keep Room types and mappings in `books.storage`.

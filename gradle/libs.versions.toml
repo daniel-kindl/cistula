@@ -5,6 +5,7 @@ room = "2.8.5"
 ksp = "2.3.12"
 coroutines = "1.11.0"
 androidx-test-core = "1.7.0"
+guava = "33.7.2-jre"
 agp = "9.5.0"
 kotlin = "2.4.21"
 detekt = "1.23.8"
@@ -35,6 +36,8 @@ app-min-sdk = "26"
 jvm-target = "17"
 
 [libraries]
+# Code generation only. GHSA-xxph-c9ww-hj94 is fixed in 33.7.2.
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
