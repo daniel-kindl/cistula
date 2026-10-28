@@ -10,6 +10,7 @@ buildscript {
 }
 
 plugins {
+    `jvm-toolchains`
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.spotless)
@@ -57,6 +58,16 @@ dependencies {
     detektCliDependencies(libs.detekt.cli)
 }
 
+val detektLauncher =
+    javaToolchains.launcherFor {
+        languageVersion.set(
+            JavaLanguageVersion.of(
+                libs.versions.detekt.jdk
+                    .get(),
+            ),
+        )
+    }
+
 val detektSources =
     listOf("app", "build-logic/convention")
         .flatMap { module ->
@@ -67,6 +78,7 @@ val detektSources =
         .filter(File::isDirectory)
 
 tasks.register<JavaExec>("detekt") {
+    javaLauncher.set(detektLauncher)
     group = "verification"
     description = "Runs Detekt static analysis on all Kotlin sources."
     val configFile = file("config/detekt/detekt.yml")

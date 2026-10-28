@@ -28,7 +28,9 @@ minSdk is 26 so that every supported device can use an adaptive icon. The reposi
 
 ## JDK
 
-The Gradle build runs on JDK 17 or later. The checked build used JDK 25.0.4.1.
+The initial policy allowed JDK 17 or later. The checked build used JDK 25.0.4.1.
+[ADR 0012](decisions/0012-run-detekt-on-jdk-21.md) supersedes that policy.
+The current [JDK policy](development/toolchain.md#jdk-policy) requires JDK 21 for Detekt and verifies Gradle on JDK 21 and 25.
 
 Kotlin `jvmTarget` is 17. Java source compatibility and target compatibility are 17. Android source in this repository must stay compatible with that target.
 

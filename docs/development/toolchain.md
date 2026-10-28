@@ -10,7 +10,7 @@ requires Gradle 9.6.0+, JDK 17+, and Build-Tools 36.0.0. The existing toolchain 
 
 | Tool | Version | Source of truth | Notes |
 | --- | --- | --- | --- |
-| JDK | 21 in CI (Temurin 21.0.12.1 used locally) | CI `setup-java` | AGP 9.5 needs JDK 17+. Bytecode target 17. |
+| JDK | 21 for Detekt, 21 or 25 for Gradle | `detekt-jdk` in `libs.versions.toml`, CI `setup-java` | Temurin 21.0.13+9 and OpenJDK 25.0.4.1 verified locally. Bytecode target 17. |
 | Gradle | 9.7.1 | `gradle/wrapper/gradle-wrapper.properties` | Distribution SHA-256 pinned. Meets the AGP 9.5 minimum without a wrapper update. |
 | Android Gradle Plugin | 9.5.0 | `libs.versions.toml` | Needs Gradle 9.6.0+, supports up to API 37. Built-in Kotlin. |
 | Kotlin | 2.4.21 | `libs.versions.toml` | Application, Compose compiler, and convention build. See ADR 0010. |
@@ -20,7 +20,7 @@ requires Gradle 9.6.0+, JDK 17+, and Build-Tools 36.0.0. The existing toolchain 
 | Compose BOM | 2026.09.00 | `libs.versions.toml` | UI (ui, ui-tooling, material3). |
 | Activity Compose | 1.13.0 | `libs.versions.toml` | |
 | Lifecycle | 2.10.0 minimum | `libs.versions.toml` | Constraint on the existing transitive runtime dependency. Lifecycle 2.9.4 Lint checks reference an API removed from AGP 9.5. The constraint preserves those checks. |
-| Detekt (CLI) | 1.23.8 | `libs.versions.toml` | Detekt 2 is alpha. |
+| Detekt (CLI) | 1.23.8 | `libs.versions.toml` | Runs on a JDK 21 toolchain. Detekt 2 is alpha. |
 | ktlint | 1.8.0 | `libs.versions.toml` | Run by Spotless. |
 | Spotless | 8.10.4 | `libs.versions.toml` | |
 | Dependency Analysis Gradle Plugin | 3.19.2 | `libs.versions.toml` | `buildHealth`. Latest stable on 2026-10-14. It officially supports AGP 8.10.0 to 9.3.1 and logs a compatibility warning for AGP 9.5.0. The warning is a log line, not a Gradle deprecation; `buildHealth` passes. Tracked in issue #11. |
@@ -28,6 +28,31 @@ requires Gradle 9.6.0+, JDK 17+, and Build-Tools 36.0.0. The existing toolchain 
 | AndroidX Test JUnit | 1.3.0 | `libs.versions.toml` | `androidx.test.ext:junit`. It brings `AndroidJUnitRunner`. |
 | Compose UI test (`ui-test-junit4`) | Compose BOM | `libs.versions.toml` | Resolved to 1.12.1 on 2026-10-14. Tests call the `junit4.v2` rule. |
 | JaCoCo | AGP default | Not pinned | 0.8.14 when checked on 2026-10-14. Report only. No percentage gate. |
+
+## JDK policy
+
+Install JDK 21 even when Gradle runs on JDK 25. The `detekt` task selects JDK 21 through a Gradle Java toolchain.
+Set `JAVA_HOME` to the JDK that runs Gradle. Gradle must also detect the JDK 21 installation.
+Use a standard installation directory, such as `~/.jdks`, or set `org.gradle.java.installations.paths` in your local Gradle properties.
+See [Gradle toolchain detection](https://docs.gradle.org/9.7.1/userguide/toolchains.html#sec:auto_detection).
+This build does not configure automatic JDK downloads. A missing JDK 21 causes the task to fail with Gradle's toolchain diagnostic.
+
+Full verification covers Gradle on JDK 21 and 25. Other Gradle JDK versions are not verified by this policy.
+CI uses JDK 21. Local verification used Temurin 21.0.13+9 and OpenJDK 25.0.4.1.
+Java and Kotlin bytecode targets stay at 17.
+
+Detekt 1.23.8 uses Kotlin compiler 2.0.21. That compiler calls `sun.misc.Unsafe.objectFieldOffset`, which emits a JVM warning on JDK 25.
+Detekt's [compatibility table](https://detekt.dev/docs/1.23.8/introduction/compatibility/) lists JDK 21 as its highest tested JDK.
+The dedicated launcher keeps Detekt on that runtime without replacing its compiler or suppressing JVM warnings.
+The task still checks the same sources with the same rules. [ADR 0012](../decisions/0012-run-detekt-on-jdk-21.md) records this decision.
+
+To check the runtime selection:
+
+1. Set `JAVA_HOME` to an installed JDK 21.
+2. Run `./eng/check-detekt-runtime.sh`. It executes Detekt without cached task results and rejects the Unsafe warning.
+3. Run `./eng/verify.sh`.
+4. Set `JAVA_HOME` to an installed JDK 25.
+5. Run both commands again.
 
 ## Vulnerability and dependency tooling
 
