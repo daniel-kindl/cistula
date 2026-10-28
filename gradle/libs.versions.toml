@@ -1,6 +1,11 @@
 # Single source of truth for every plugin and library version.
 # Rationale and compatibility notes: docs/development/toolchain.md
 [versions]
+room = "2.8.5"
+ksp = "2.3.12"
+coroutines = "1.11.0"
+androidx-test-core = "1.7.0"
+guava = "33.7.2-jre"
 agp = "9.5.0"
 kotlin = "2.4.21"
 detekt = "1.23.8"
@@ -31,6 +36,13 @@ app-min-sdk = "26"
 jvm-target = "17"
 
 [libraries]
+# Code generation only. GHSA-xxph-c9ww-hj94 is fixed in 33.7.2.
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test-core" }
 # Constraint only. Activity and Compose already bring Lifecycle transitively.
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "lifecycle" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -63,6 +75,8 @@ compose-compiler-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compil
 build-tool-security-constraints = ["bouncycastle-bcprov", "bouncycastle-bcpkix", "bouncycastle-bcutil", "jose4j", "jdom2", "httpclient", "commons-lang3"]
 
 [plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+androidx-room = { id = "androidx.room", version.ref = "room" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

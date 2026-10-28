@@ -29,6 +29,23 @@ requires Gradle 9.6.0+, JDK 17+, and Build-Tools 36.0.0. The existing toolchain 
 | Compose UI test (`ui-test-junit4`) | Compose BOM | `libs.versions.toml` | Resolved to 1.12.1 on 2026-10-14. Tests call the `junit4.v2` rule. |
 | JaCoCo | AGP default | Not pinned | 0.8.14 when checked on 2026-10-14. Report only. No percentage gate. |
 
+## Local book storage dependencies
+
+Issue #31 and [ADR 0014](../decisions/0014-local-book-storage.md) add these dependencies.
+Versions were checked against official sources on 2026-10-28.
+
+| Dependency | Version | Purpose and source |
+| --- | --- | --- |
+| Room | 2.8.5 | Runtime, compiler, and schema plugin. [AndroidX release notes](https://developer.android.com/jetpack/androidx/releases/room). |
+| Guava, compiler classpath only | 33.7.2-jre | Constraint for Room code generation. Fixes [GHSA-xxph-c9ww-hj94](https://github.com/advisories/GHSA-xxph-c9ww-hj94). |
+| KSP | 2.3.12 | Room code generation. [KSP release notes](https://github.com/google/ksp/releases/tag/2.3.12). |
+| Coroutines | 1.11.0 | Suspend/Flow repository contract and device-test scheduler. [Coroutines release notes](https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.11.0). |
+| AndroidX Test Core | 1.7.0 | Application context for storage instrumentation tests. [AndroidX Test release notes](https://developer.android.com/jetpack/androidx/releases/test). |
+
+Room uses Android SQLite. JSON list conversion uses Android APIs. No SQLite or serialization runtime is added separately.
+`config/approved-feature-dependencies.txt` permits only the exact Room/KSP declarations for this issue.
+`./eng/check-feature-dependencies-test.sh` verifies that unapproved feature dependencies still fail.
+
 ## JDK policy
 
 Install JDK 21 even when Gradle runs on JDK 25. The `detekt` task selects JDK 21 through a Gradle Java toolchain.

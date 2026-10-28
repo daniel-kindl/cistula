@@ -11,6 +11,9 @@ string resource `app_name`. The composable shows `content.title`.
 
 Issue #30 adds JVM tests for the [book domain contract](../architecture/books.md).
 They cover ISBN validation, partial metadata, immutable collections, local identity, reading transitions, and user data preservation.
+Issue #31 adds JVM mapping tests and real Room storage tests in `androidTest`.
+Storage tests use disposable files to check CRUD, ordered observation, reopen persistence, rollback, and migration refusal.
+See the [storage contract](../architecture/book-storage.md).
 
 ## Where tests go
 

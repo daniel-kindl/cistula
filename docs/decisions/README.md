@@ -17,4 +17,6 @@
 
 | [0013](0013-book-domain-ownership.md) | Separate book identity, metadata, and user data | Proposed |
 
+| [0014](0014-local-book-storage.md) | Store the local book collection with Room | Proposed |
+
 New ADR: copy [0000-template.md](0000-template.md).

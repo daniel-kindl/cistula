@@ -1,5 +1,11 @@
 plugins {
     alias(libs.plugins.cistula.android.application)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.androidx.room)
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 android {
@@ -41,7 +47,15 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.kotlinx.coroutines.core)
+    ksp(libs.androidx.room.compiler)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.androidx.test.core)
     constraints {
+        add("ksp", libs.guava) {
+            because("Room code generation brings Guava affected by GHSA-xxph-c9ww-hj94.")
+        }
         implementation(libs.androidx.lifecycle.runtime) {
             because("Lifecycle 2.9.4 Lint checks use an API removed from AGP 9.5.")
         }
