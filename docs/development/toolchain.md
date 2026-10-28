@@ -11,7 +11,7 @@ requires Gradle 9.6.0+, JDK 17+, and Build-Tools 36.0.0. The existing toolchain 
 | Tool | Version | Source of truth | Notes |
 | --- | --- | --- | --- |
 | JDK | 21 in CI (Temurin 21.0.12.1 used locally) | CI `setup-java` | AGP 9.5 needs JDK 17+. Bytecode target 17. |
-| Gradle | 9.7.1 | `gradle/wrapper/gradle-wrapper.properties` | Distribution SHA-256 pinned. This fix retains the existing Gradle version. |
+| Gradle | 9.7.1 | `gradle/wrapper/gradle-wrapper.properties` | Distribution SHA-256 pinned. Meets the AGP 9.5 minimum without a wrapper update. |
 | Android Gradle Plugin | 9.5.0 | `libs.versions.toml` | Needs Gradle 9.6.0+, supports up to API 37. Built-in Kotlin. |
 | Kotlin | 2.4.21 | `libs.versions.toml` | Application, Compose compiler, and convention build. See ADR 0010. |
 | compileSdk / targetSdk | 37 | `libs.versions.toml` | Platform `android-37.0`. |
@@ -19,6 +19,7 @@ requires Gradle 9.6.0+, JDK 17+, and Build-Tools 36.0.0. The existing toolchain 
 | Build-Tools | 36.0.0 | AGP default | Downloaded by AGP. |
 | Compose BOM | 2026.09.00 | `libs.versions.toml` | UI (ui, ui-tooling, material3). |
 | Activity Compose | 1.13.0 | `libs.versions.toml` | |
+| Lifecycle | 2.10.0 minimum | `libs.versions.toml` | Constraint on the existing transitive runtime dependency. Lifecycle 2.9.4 Lint checks reference an API removed from AGP 9.5. The constraint preserves those checks. |
 | Detekt (CLI) | 1.23.8 | `libs.versions.toml` | Detekt 2 is alpha. |
 | ktlint | 1.8.0 | `libs.versions.toml` | Run by Spotless. |
 | Spotless | 8.10.4 | `libs.versions.toml` | |

@@ -41,6 +41,11 @@ android {
 }
 
 dependencies {
+    constraints {
+        implementation(libs.androidx.lifecycle.runtime) {
+            because("Lifecycle 2.9.4 Lint checks use an API removed from AGP 9.5.")
+        }
+    }
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(libs.androidx.activity.compose)
     implementation(composeBom)
