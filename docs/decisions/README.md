@@ -15,4 +15,6 @@
 | [0011](0011-adopt-dkstack-guidelines.md) | Adopt dkstack shared guidelines | Proposed |
 | [0012](0012-run-detekt-on-jdk-21.md) | Run Detekt on JDK 21 | Proposed |
 
+| [0013](0013-book-domain-ownership.md) | Separate book identity, metadata, and user data | Proposed |
+
 New ADR: copy [0000-template.md](0000-template.md).

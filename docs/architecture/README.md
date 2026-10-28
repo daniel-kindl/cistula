@@ -1,6 +1,6 @@
 # Architecture
 
-## Current state (M0, binding)
+## Current state (binding)
 
 ```text
 app                    (Android application, com.android.application)
@@ -12,7 +12,9 @@ build-logic/convention (Gradle convention plugin, build time only)
 - `app` applies `cistula.android.application` from `build-logic`. The plugin holds the SDK levels,
   JVM target, Kotlin warnings-as-errors, strict Lint, and the release build type (no minify).
 - `applicationId` and namespace: `dev.danielkindl.cistula`.
-- The product scope is an offline-first personal book collection (`README.md`). M0 contains no
+- The `books` package defines the [book domain contract](books.md) using Kotlin and JDK APIs only.
+  It separates bibliographic metadata from user-owned fields. ADR 0013 records the design.
+- The product scope is an offline-first personal book collection (`README.md`). The UI still has no
   book features.
 
 ## Dependency rules (binding)
