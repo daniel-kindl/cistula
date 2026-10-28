@@ -1,7 +1,8 @@
 # Book domain contract
 
 Issue #30 introduces `dev.danielkindl.cistula.books` inside `app`.
-These types use Kotlin and JDK APIs only. They do not call Android, storage, or network APIs.
+The value types use Kotlin and JDK APIs only. They do not call Android, storage, or network APIs.
+Issue #31 adds a coroutine-based repository contract and a separate [Room storage adapter](book-storage.md).
 [ADR 0013](../decisions/0013-book-domain-ownership.md) records the ownership and identity boundaries.
 
 ## Identity and ownership
@@ -84,6 +85,7 @@ Page progress serves paginated books. Audiobook duration and other progress unit
 ## Extension boundaries
 
 Future UI, storage, and metadata adapters can consume these book-specific types.
-No adapter, repository interface, persistence annotation, or metadata provider exists in this change.
+Issue #30 added no adapter, repository interface, persistence annotation, or metadata provider.
+Issue #31 adds storage separately and keeps persistence annotations outside the domain value types.
 The package can move to a Kotlin module when an approved issue requires that boundary.
 There is no universal media type, collection framework, account model, or synchronization contract.
