@@ -6,7 +6,7 @@ Cistula is a native Android application for a personal book collection. The appl
 
 You need all of the following items.
 
-- JDK 17 or later. CI uses Temurin 21. JDK 25.0.4.1 and Temurin 21.0.12.1 were tested locally. The JDK policy is in `docs/initialization.md`.
+- JDK 21 for Detekt. Gradle can run on JDK 21 or 25. Both were verified locally with Temurin 21.0.13+9 and OpenJDK 25.0.4.1. CI uses Temurin 21. See the [JDK policy](docs/development/toolchain.md#jdk-policy).
 - Android SDK platform `android-37.0`.
 - Android SDK Build-Tools 36.0.0.
 - An SDK location. Set `ANDROID_HOME` to the SDK directory, or create `local.properties` with `sdk.dir`. Do not commit `local.properties`.
