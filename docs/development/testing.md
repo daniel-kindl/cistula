@@ -9,7 +9,8 @@ The application has one screen. The screen shows the application name.
 `CistulaAppViewModel` takes that title and exposes `CistulaAppContent`. `MainActivity` passes the
 string resource `app_name`. The composable shows `content.title`.
 
-M0 has no book behavior. Add a book test only in an issue that adds that behavior.
+Issue #30 adds JVM tests for the [book domain contract](../architecture/books.md).
+They cover ISBN validation, partial metadata, immutable collections, local identity, reading transitions, and user data preservation.
 
 ## Where tests go
 

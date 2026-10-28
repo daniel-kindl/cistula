@@ -1,6 +1,6 @@
 # Cistula
 
-Cistula is a native Android application for a personal book collection. The application is offline-first. This repository is at milestone M0. M0 is the engineering foundation. It does not contain book features.
+Cistula is a native Android application for a personal book collection. The application is offline-first. The repository contains the M0 engineering foundation and a [book domain contract](docs/architecture/books.md). The screen shows the application name. Book screens, storage, and online metadata are not implemented.
 
 ## Requirements
 
